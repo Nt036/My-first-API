@@ -2,10 +2,14 @@ const express = require('express');
 
 const app = express();
 
-const PORT = 5000;
+const PORT = 4000;
+
+
 
 //Middleware
 app.use(express.json());
+
+
 
 app.get('/', (request,response) => {
     response.send('welcome to my backend server!');
@@ -13,18 +17,18 @@ app.get('/', (request,response) => {
 
 
 //HTTP METHODS: GET, PUT, DELETE
-app.get('/about', (request,respone) => {
-    response.send('This is my about page');
+app.get('/about', (req, res) => {
+    res.send('This is my about page !');
 });
 
 app.get('/contact', (req,res) => {
-    response.send('This is my contact page');
+    res.send('This is my contact page');
 });
 
 //Route parameters
-app.get('/users/:id', (request,response) =>{
+app.get('/users/:id', (req,res) =>{
     const userId = req.paras.id;
-    response.send('User ID is: ' + userId);
+    res.send('User ID is: ' + userId);
 });
 
 
@@ -49,12 +53,29 @@ app.get('/products', (request,response) => {
 
 let products = []
 
-//
-//Post request
-app.post
 
-   /* app.listen(PORT, () => {
+//Post request
+app.post('/products', (req,res) => {
+
+    const {name ,price} = req.body;
+
+    const newProduct = {
+        id:products.length + 1,
+        name,
+        price,
+    }
+
+    products.push(newProduct);
+
+    res.status(201).json({
+        message: "Product added",
+        product: newProduct
+    });
+});
+
+   app.listen(PORT, () => {
         console.log('server is running on port' + PORT)
 
     })
-})*/
+
+    
