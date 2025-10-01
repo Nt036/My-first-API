@@ -2,7 +2,7 @@ const express = require('express');
 
 const app = express();
 
-const PORT = 4000;
+
 
 
 
@@ -73,9 +73,13 @@ app.post('/products', (req,res) => {
     });
 });
 
-   app.listen(PORT, () => {
+
+app.post
+
+   app.listen(process.env.PORT, () => {
         console.log('server is running on port' + PORT)
 
     })
 
-    
+    //mongodbdatabase
+//mongodb+srv://trinah:mongodbdatabase@cluster0.lgnlw0v.mongodb.net/
