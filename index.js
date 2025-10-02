@@ -1,4 +1,10 @@
 const express = require('express');
+const connectDB = require("./db")
+
+require("dotenv").config();
+
+const Product = require("./models/Product");
+
 
 const app = express();
 
@@ -16,7 +22,8 @@ app.get('/', (request,response) => {
 });
 
 
-//HTTP METHODS: GET, PUT, DELETE
+//HTTP METHODS: GET, POST, PUT, DELETE,PATCH
+
 app.get('/about', (req, res) => {
     res.send('This is my about page !');
 });
@@ -73,13 +80,22 @@ app.post('/products', (req,res) => {
     });
 });
 
+app.post('/save.product', async (req,res) => {
+    try {
+        const product = new Product(req.body);
+       // await product.save();
+       // res.json(product);
+    } catch (error) {
+       res.status(500).json({error: error.message})
+    }
+})
 
-app.post
+
+
 
    app.listen(process.env.PORT, () => {
-        console.log('server is running on port' + PORT)
+        console.log("server is running on port" + process.env.PORT);
 
     })
 
-    //mongodbdatabase
-//mongodb+srv://trinah:mongodbdatabase@cluster0.lgnlw0v.mongodb.net/
+connectDB();
